@@ -3,7 +3,7 @@ package com.milktea.entity;
 import lombok.Data;
 
 @Data
-public class useraddress {
+public class Useraddress {
 
     //    地址id
     private Integer id;
