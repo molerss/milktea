@@ -27,5 +27,5 @@ public class Goods {
     private String message;
 
     //商品类型id
-    private Integer type_id;
+    private Integer typeId;
 }
