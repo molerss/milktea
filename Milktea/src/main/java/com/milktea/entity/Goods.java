@@ -2,8 +2,11 @@ package com.milktea.entity;
 
 import lombok.Data;
 
+/**
+ * 商品信息表
+ */
 @Data
-public class goods {
+public class Goods {
 
     //商品id
     private Integer id;
