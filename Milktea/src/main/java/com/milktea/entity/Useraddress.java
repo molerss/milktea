@@ -2,6 +2,9 @@ package com.milktea.entity;
 
 import lombok.Data;
 
+/**
+ * 地址信息表
+ */
 @Data
 public class Useraddress {
 
