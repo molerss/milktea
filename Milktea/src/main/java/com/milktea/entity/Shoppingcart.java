@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Shoppingcart {
 
-//    购物车id
+//    购物车 id
     private Integer id;
 
 //    用户id
