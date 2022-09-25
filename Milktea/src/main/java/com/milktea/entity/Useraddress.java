@@ -12,7 +12,7 @@ public class Useraddress {
     private Integer id;
 
     //    用户id
-    private Integer user_id;
+    private Integer userId;//采用驼峰命名法进行映射
 
     //    用户姓名
     private String name;
