@@ -1,6 +1,10 @@
 package com.milktea.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * 商品信息表
@@ -28,4 +32,20 @@ public class Goods {
 
     //商品类型id
     private Integer typeId;
+
+    //创建时间
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    //修改时间
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    //创建人id
+    @TableField(fill = FieldFill.INSERT)
+    private Long createUser;
+
+    //修改人id
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateUser;
 }
