@@ -41,6 +41,13 @@ public class GoodsController {
         return R.success(pageInfo);
     }
 
+    @GetMapping("/{id}")
+    public R<Goods> get(@PathVariable int id){
+
+        Goods goods = goodsService.getById(id);
+        return R.success(goods);
+    }
+
     @DeleteMapping
     public R<String> delete(String ids){
 //        Integer[] list = Convert.toIntArray(ids.split(","));
@@ -60,12 +67,21 @@ public class GoodsController {
     @PostMapping
     public R<String> save(@RequestBody Goods goods){
 
-            UUID ids = UUID.randomUUID();
-            Integer userId = ids.toString().hashCode();
-            goods.setId(userId);
+        UUID ids = UUID.randomUUID();
+        Integer userId = ids.toString().hashCode();
+        goods.setId(userId);
 
         goodsService.save(goods);
 
         return R.success("新增菜品成功");
+    }
+
+    @PutMapping
+    public R<String> update(@RequestBody Goods goods){
+        log.info(goods.toString());
+
+        goodsService.updateById(goods);
+
+        return R.success("修改菜品成功");
     }
 }
