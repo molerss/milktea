@@ -10,8 +10,10 @@ import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,6 +53,18 @@ public class GoodsController {
         }
         List<Integer> list1 = Arrays.stream(arr2).boxed().collect(Collectors.toList());
         goodsService.removeByIds(list1);
+
+        return R.success("新增菜品成功");
+    }
+
+    @PostMapping
+    public R<String> save(@RequestBody Goods goods){
+
+            UUID ids = UUID.randomUUID();
+            Integer userId = ids.toString().hashCode();
+            goods.setId(userId);
+
+        goodsService.save(goods);
 
         return R.success("新增菜品成功");
     }
