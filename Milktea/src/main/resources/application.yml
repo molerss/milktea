@@ -17,3 +17,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
+milktea:
+  path: D:\前端\vue\milktea_vue-master\src\imge\img
