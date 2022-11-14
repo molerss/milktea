@@ -12,14 +12,17 @@ import java.time.LocalDateTime;
 @Data
 public class Peiliao {
 
-//    配料id
+    //    配料id
     private Integer id;
 
-//    配料名
-    private String peiliaoname;
+    //    商品id
+    private Integer goodsid;
 
-//    配料内容
-    private String peiliaocontent;
+    //    配料名
+    private String name;
+
+    //    配料内容
+    private String value;
 
 
 }
