@@ -21,19 +21,5 @@ public class Peiliao {
 //    配料内容
     private String peiliaocontent;
 
-    //创建时间
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
 
-    //修改时间
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    //创建人id
-    @TableField(fill = FieldFill.INSERT)
-    private Long createUser;
-
-    //修改人id
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateUser;
 }

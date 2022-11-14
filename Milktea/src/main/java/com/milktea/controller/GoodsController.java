@@ -3,10 +3,14 @@ package com.milktea.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.milktea.common.R;
+import com.milktea.dto.GoodsDto;
 import com.milktea.entity.Goods;
+import com.milktea.entity.GoodsType;
 import com.milktea.service.GoodsService;
+import com.milktea.service.GoodsTypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +28,15 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private GoodsTypeService goodsTypeService;
+
     @GetMapping("/page")
     public R<Page> page(int page, int pageSize,String name) {
 
         //构造分页构造器对象
         Page<Goods> pageInfo = new Page<>(page, pageSize);
+        Page<GoodsDto> goodsDtoPage = new Page<>();
         //条件构造器
         LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
         //添加过滤条件
@@ -38,7 +46,31 @@ public class GoodsController {
         //分页查询
         goodsService.page(pageInfo,queryWrapper);
 
-        return R.success(pageInfo);
+        //对象拷贝
+        BeanUtils.copyProperties(pageInfo,goodsDtoPage,"records");
+
+        List<Goods> records = pageInfo.getRecords();
+
+        List<GoodsDto> list = records.stream().map((item) -> {
+            GoodsDto goodsDto = new GoodsDto();
+
+            BeanUtils.copyProperties(item,goodsDto);
+
+            int typeId = item.getTypeId();//分类Id
+            //根据id查询分类对象
+            GoodsType goodsType = goodsTypeService.getById(typeId);
+
+            if (goodsType != null){
+                String TypeName = goodsType.getTypename();
+                goodsDto.setGoodsTypeName(TypeName);
+            }
+
+
+            return goodsDto;
+        }).collect(Collectors.toList());
+
+        goodsDtoPage.setRecords(list);
+        return R.success(goodsDtoPage);
     }
 
     @GetMapping("/{id}")
