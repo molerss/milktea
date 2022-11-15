@@ -26,7 +26,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     private PeiliaoService peiliaoService;
 
     public void saveWithPeiliao(GoodsDto goodsDto) {
-        log.info("3------------------"+goodsDto);
         //保存菜品的基本信息到菜品表dish
         this.save(goodsDto);
 
