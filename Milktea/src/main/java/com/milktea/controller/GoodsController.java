@@ -136,7 +136,7 @@ public class GoodsController {
         List<Integer> list1 = Arrays.stream(arr2).boxed().collect(Collectors.toList());
         goodsService.removeByIds(list1);
 
-        return R.success("新增菜品成功");
+        return R.success("删除菜品成功");
     }
 
     @PostMapping

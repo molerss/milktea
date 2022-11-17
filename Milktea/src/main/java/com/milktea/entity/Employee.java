@@ -35,6 +35,8 @@ public class Employee {
 
 //    电话
     private String phone;
+//   身份证号
+    private String idcard;
 
     //创建时间
     @TableField(fill = FieldFill.INSERT)
