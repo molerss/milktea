@@ -7,7 +7,7 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/milktea?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: root
-      password:
+      password: 123456
 
 mybatis-plus:
   configuration:
@@ -19,4 +19,4 @@ mybatis-plus:
       id-type: ASSIGN_ID
 
 milktea:
-  path: D:\前端\vue\milktea_vue-master\src\imge\img
+  path: D:\java\milktea_vue\src\imge\img
