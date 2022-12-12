@@ -36,4 +36,5 @@ public class Shoppingcart {
     //修改人id
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
+
 }

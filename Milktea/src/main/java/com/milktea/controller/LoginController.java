@@ -1,6 +1,7 @@
 package com.milktea.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.milktea.common.BaseContext;
 import com.milktea.common.R;
 import com.milktea.entity.User;
 import com.milktea.service.UserService;
@@ -36,6 +37,7 @@ public class LoginController {
             return R.error("密码错误");
         }else{
             request.getSession().setAttribute("user",user1.getId());
+            BaseContext.setCurrentId((Integer) request.getSession().getAttribute("user"));
             return R.success(user1);
         }
     }
