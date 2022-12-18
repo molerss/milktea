@@ -1,7 +1,7 @@
 package com.milktea.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.milktea.entity.Useraddress;
+import com.milktea.entity.UserAddress;
 
-public interface UseraddressService extends IService<Useraddress> {
+public interface UseraddressService extends IService<UserAddress> {
 }

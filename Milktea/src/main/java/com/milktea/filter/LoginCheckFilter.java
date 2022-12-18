@@ -3,6 +3,7 @@
 //import com.alibaba.fastjson.JSON;
 //import com.milktea.common.BaseContext;
 //import com.milktea.common.R;
+//import lombok.extern.slf4j.Slf4j;
 //import org.springframework.util.AntPathMatcher;
 //
 //import javax.servlet.*;
@@ -17,6 +18,7 @@
 //
 ////设置未过滤器
 //@WebFilter(filterName = "LoginCheckFilter",urlPatterns = "/*")
+//@Slf4j
 //public class LoginCheckFilter implements Filter {
 //
 //    //路径匹配器，支持通配符
@@ -32,9 +34,13 @@
 //        //1.获取本次请求的URL
 //        String url = request.getRequestURI();
 //
+//        log.info("拦截到请求"+ url);
+//
 //        //不用过滤的请求
 //        String[] urls = new String[]{
-//          "/employee"
+//          "/vuelogin/login",
+//          "/common/**",
+//
 //        };
 //
 //        //2,判断本次请求是否需要处理
@@ -46,9 +52,8 @@
 //        }
 //
 //        //4.判断登入状态，如果已登入，则直接放行
-//        if (request.getSession().getAttribute("employee") != null){
-//            Long id = (Long) request.getSession().getAttribute("employee");
-//            BaseContext.setCurrentId(id);
+//        if (request.getSession().getAttribute("user") != null){
+//            BaseContext.setCurrentId((Integer) request.getSession().getAttribute("user"));
 //
 //            filterChain.doFilter(request,response);
 //            return;
@@ -60,15 +65,15 @@
 //    }
 //
 //    /**
-//     *路径匹配，检查本次请求是否需要放行
+//     *
 //     * @param urls
-//     * @param url
+//     * @param requestURI
 //     * @return
 //     */
-//    private boolean check(String[] urls, String url) {
-//        for(String demo: urls){
-//            Boolean check = PATH_MATCHER.match(demo,url);
-//            if (check){
+//    public boolean check(String[] urls, String requestURI) {
+//        for (String url : urls) {
+//            boolean match = PATH_MATCHER.match(url, requestURI);
+//            if (match) {
 //                return true;
 //            }
 //        }

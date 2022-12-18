@@ -6,27 +6,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-/**
- * 订单表
- */
 @Data
-public class Dingdan {
+public class DingdanCode {
 
-//    订单id
+    //    订单id
     private Integer id;
 
-//    用户id
+    //    用户id
     private Integer userId;
 
-//    商品id
-    private Integer goodsId;
+    //    地址id
+    private Integer addressId;
 
-//    订单状态   0：未取  1；已取
-    private Integer state;
-
-//    订单编号
+    //    订单编号
     private String code;
 
+    //    订单状态   0：未取  1；已取
+    private Integer state;
     //创建时间
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;

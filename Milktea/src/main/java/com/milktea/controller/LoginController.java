@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.milktea.common.BaseContext;
 import com.milktea.common.R;
 import com.milktea.entity.User;
+import com.milktea.service.NowUserServuce;
 import com.milktea.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @RestController
@@ -20,8 +22,11 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private NowUserServuce nowUserServuce;
+
     @PostMapping("/login")
-    public R<User> login(HttpServletRequest request, @RequestBody User user) {
+    public R<User> login( HttpSession session ,@RequestBody User user) {
 
 //        UUID id = UUID.randomUUID();
 //        Integer ids = id.toString().hashCode();
@@ -36,8 +41,8 @@ public class LoginController {
         }else if(!user1.getPassword().equals(user.getPassword())){
             return R.error("密码错误");
         }else{
-            request.getSession().setAttribute("user",user1.getId());
-            BaseContext.setCurrentId((Integer) request.getSession().getAttribute("user"));
+            nowUserServuce.setUserId(user1.getId());
+
             return R.success(user1);
         }
     }
