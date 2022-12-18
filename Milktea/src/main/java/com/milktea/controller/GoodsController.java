@@ -37,7 +37,7 @@ public class GoodsController {
     private PeiliaoService peiliaoService;
 
     @GetMapping("/page")
-    public R<Page> page(int page, int pageSize, String name) {
+    public R<Page> page( int page, int pageSize, String name) {
 
         //构造分页构造器对象
         Page<Goods> pageInfo = new Page<>(page, pageSize);
@@ -156,5 +156,26 @@ public class GoodsController {
         goodsService.updateWithPeiliao(goodsDto);
 
         return R.success("修改菜品成功");
+    }
+    @GetMapping("/getGoods")
+    public R<Page> getGoods( int page, int  pageSize,String name){
+
+        Page<Goods> pageInfo = new Page<>(page, pageSize);
+
+        LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
+
+        queryWrapper.like(name != null, Goods::getName, name);
+
+        queryWrapper.orderByAsc(Goods::getUpdateTime);
+
+        goodsService.page(pageInfo,queryWrapper);
+
+        return R.success(pageInfo);
+    }
+    @GetMapping("/danpin/{idss}")
+    public R<Goods> getGoodsById(@PathVariable int idss){
+
+        Goods goods = goodsService.getById(idss);
+        return R.success(goods);
     }
 }
