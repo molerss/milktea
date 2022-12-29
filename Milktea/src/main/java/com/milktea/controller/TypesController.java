@@ -23,18 +23,19 @@ public class TypesController {
     @Autowired
     private GoodsTypeService typeService;
 
+//    将 HTTP GET 请求映射到该处理程序方法
     @GetMapping("/page")
     public R<Page> page(int page, int pageSize){
-        //分页构造器
+        //创建一个分页构造器
         Page<GoodsType> pageInfo = new Page<>(page,pageSize);
-        //条件构造器
+        //创建一个条件构造器
         LambdaQueryWrapper<GoodsType> queryWrapper = new LambdaQueryWrapper<>();
-
+        //为条件构造器增加一个排序条件
         queryWrapper.orderByAsc(GoodsType::getUpdateTime);
 
-        //分页查询
+        //根据这个条件对分类表进行分页查询
         typeService.page(pageInfo,queryWrapper);
-
+        //返回查询到的分页信息
         return R.success(pageInfo);
     }
 
